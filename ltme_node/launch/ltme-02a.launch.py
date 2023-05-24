@@ -7,7 +7,9 @@ import launch_ros.actions
 def generate_launch_description():
   return launch.LaunchDescription([
     launch_ros.actions.Node(
-      package="ltme_node", node_executable="ltme_node", node_name=["ltme_node"],
+      package="ltme_node", 
+      executable="ltme_node",
+      name=["ltme_node"],
       output="screen",
       parameters=[
         { "device_model": "LTME-02A" },

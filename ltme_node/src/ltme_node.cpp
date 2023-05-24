@@ -35,18 +35,18 @@ LidarDriver::LidarDriver()
 {
   RCLCPP_INFO(node_->get_logger(), "ltme_node started");
 
-  node_->declare_parameter("device_model",device_model_);
-  node_->declare_parameter("device_address",device_address_);
-  node_->declare_parameter("frame_id",frame_id_);
-  node_->declare_parameter("invert_frame",invert_frame_);
-  node_->declare_parameter("angle_min",angle_min_);
-  node_->declare_parameter("angle_max",angle_max_);
-  node_->declare_parameter("angle_excluded_min",angle_excluded_min_);
-  node_->declare_parameter("angle_excluded_max",angle_excluded_max_);
-  node_->declare_parameter("range_min",range_min_);
-  node_->declare_parameter("range_max",range_max_);
-  node_->declare_parameter("average_factor",average_factor_);
-  node_->declare_parameter("shadow_filter_strength",shadow_filter_strength_);
+  node_->declare_parameter<std::string>("device_model");
+  node_->declare_parameter<std::string>("device_address");
+  node_->declare_parameter<std::string>("frame_id",LidarDriver::DEFAULT_FRAME_ID);
+  node_->declare_parameter<bool>("invert_frame",LidarDriver::DEFAULT_INVERT_FRAME);
+  node_->declare_parameter<double>("angle_min",LidarDriver::ANGLE_MIN_LIMIT);
+  node_->declare_parameter<double>("angle_max",LidarDriver::ANGLE_MAX_LIMIT);
+  node_->declare_parameter<double>("angle_excluded_min",LidarDriver::DEFAULT_ANGLE_EXCLUDED_MIN);
+  node_->declare_parameter<double>("angle_excluded_max",LidarDriver::DEFAULT_ANGLE_EXCLUDED_MAX);
+  node_->declare_parameter<double>("range_min",LidarDriver::RANGE_MIN_LIMIT);
+  node_->declare_parameter<double>("range_max",LidarDriver::RANGE_MAX_LIMIT_02A);
+  node_->declare_parameter<int>("average_factor",LidarDriver::DEFAULT_AVERAGE_FACTOR);
+  node_->declare_parameter<int>("shadow_filter_strength",LidarDriver::DEFAULT_SHADOW_FILTER_STRENGTH);
 
   if (!node_->get_parameter("device_model", device_model_)) {
     RCLCPP_ERROR(node_->get_logger(), "Missing required parameter \"device_model\"");
